@@ -4,7 +4,7 @@ from .Generaldistribution import Distribution
 from .Binomialdistribution import Binomial
 
 class Bernoulli(Distribution):
-     """ Bernoulli distribution class for calculating and visualizing a Bernoulli distribution.
+    """ Bernoulli distribution class for calculating and visualizing a Bernoulli distribution.
 
       Attributes:
       	mean (float) representing the mean value of the distribution
@@ -14,37 +14,33 @@ class Bernoulli(Distribution):
 
      """
 
+    def __init__(self, prob=.5):
 
-     def __init__(self, prob=.5):
+        self.p = prob
+        Distribution.__init__(self, self.calculate_mean(), self.calculate_stdev())
 
-	        self.p = prob
+    def calculate_mean(self):
+        """Function to calculate the mean
 
-	        Distribution.__init__(self, self.calculate_mean(), self.calculate_stdev())
-
-     def calculate_mean(self):
-
-	        """Function to calculate the mean
-
-            Args:
+           Args:
                 None
 
-            Returns:
+           Returns:
                 float: mean of the data set
 
-            """
+        """
+        self.mean = self.p
 
-	        self.mean = self.p
+        return self.mean
 
-	        return self.mean
-
-     def calculate_stdev(self):
+    def calculate_stdev(self):
 
         """Function to calculate the standard deviation from p.
 
-        Args:
+          Args:
             None
 
-        Returns:
+          Returns:
             float: standard deviation of the data set
 
         """
@@ -53,7 +49,7 @@ class Bernoulli(Distribution):
 
         return self.stdev
 
-     def replace_stats_with_data(self):
+    def replace_stats_with_data(self):
 
         """Function to calculate p from the data set
 
@@ -71,9 +67,9 @@ class Bernoulli(Distribution):
 
         return self.p
 
-     def pmf(self, k):
+    def pmf(self, k):
 
-       	"""Probability mass function calculator for the Bernoulli distribution.
+        """Probability mass function calculator for the Bernoulli distribution.
 
            Args:
                k (0 or 1): number of successes
@@ -87,7 +83,7 @@ class Bernoulli(Distribution):
 
         return self.p**k*(q)**(1-k)
 
-     def plot_bar(self):
+    def plot_bar(self):
 
         """Function to output a histogram of the instance variable data using
         matplotlib pyplot library.
@@ -99,12 +95,12 @@ class Bernoulli(Distribution):
               None
         """
 
-        plt.bar(x = ['0', '1'], height = [(1 - self.p) , self.p ])
+        plt.bar(x=['0', '1'], height=[(1 - self.p), self.p])
         plt.title('Bar Chart of Data')
         plt.xlabel('outcome')
         plt.ylabel('count')
 
-     def __add__(self, other):
+    def __add__(self, other):
 
         """Function to add together two Bernoulli distributions with equal p
 
@@ -130,7 +126,7 @@ class Bernoulli(Distribution):
         return result
 
 
-     def __repr__(self):
+    def __repr__(self):
 
         """Function to output the characteristics of the Bernoulli instance
 

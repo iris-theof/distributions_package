@@ -25,11 +25,14 @@ class TestGaussianClass(unittest.TestCase):
 
     def test_meancalculation(self):
         self.assertEqual(self.gaussian.calculate_mean(),\
-         sum(self.gaussian.data) / float(len(self.gaussian.data)), 'calculated mean not as expected')
+         sum(self.gaussian.data) / float(len(self.gaussian.data)), 'calculated \
+         mean not as expected')
 
     def test_stdevcalculation(self):
-        self.assertEqual(round(self.gaussian.calculate_stdev(), 2), 92.87, 'sample standard deviation incorrect')
-        self.assertEqual(round(self.gaussian.calculate_stdev(0), 2), 88.55, 'population standard deviation incorrect')
+        self.assertEqual(round(self.gaussian.calculate_stdev(), 2), 92.87,\
+         'sample standard deviation incorrect')
+        self.assertEqual(round(self.gaussian.calculate_stdev(0), 2), 88.55,\
+         'population standard deviation incorrect')
 
     def test_pdf(self):
         self.assertEqual(round(self.gaussian.pdf(25), 5), 0.19947,\
@@ -66,11 +69,11 @@ class TestBinomialClass(unittest.TestCase):
 
     def test_calculatestdev(self):
         stdev = self.binomial.calculate_stdev()
-        self.assertEqual(round(stdev,2), 2.19)
+        self.assertEqual(round(stdev, 2), 2.19)
 
     def test_replace_stats_with_data(self):
         p, n = self.binomial.replace_stats_with_data()
-        self.assertEqual(round(p,3), .615)
+        self.assertEqual(round(p, 3), .615)
         self.assertEqual(n, 13)
 
     def test_pmf(self):
@@ -107,11 +110,11 @@ class TestBernoulliClass(unittest.TestCase):
 
     def test_calculatestdev(self):
         stdev = self.bernoulli.calculate_stdev()
-        self.assertEqual(round(stdev,2), 0.49)
+        self.assertEqual(round(stdev, 2), 0.49)
 
     def test_replace_stats_with_data(self):
         p = self.bernoulli.replace_stats_with_data()
-        self.assertEqual(round(p,3), .615)
+        self.assertEqual(round(p, 3), .615)
 
     def test_pmf(self):
         self.assertEqual(round(self.bernoulli.pmf(1), 1), 0.4)
