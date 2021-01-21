@@ -12,10 +12,6 @@ class Binomial(Distribution):
         data_list (list of floats) a list of floats to be extracted from the data file
         p (float) representing the probability of an event occurring
         n (int) number of trials
-
-
-    TODO: Fill out all functions below
-
     """
 
 
@@ -107,11 +103,11 @@ class Binomial(Distribution):
         """Probability density function calculator for the binomial distribution.
 
         Args:
-            x (float): point for calculating the probability density function
+          k (natural number): number of successes
 
 
         Returns:
-            float: probability density function output
+            float: probability mass function output
         """
 
         a = math.factorial(self.n) / (math.factorial(k) * (math.factorial(self.n - k)))
@@ -185,7 +181,7 @@ class Binomial(Distribution):
             None
 
         Returns:
-            string: characteristics of the Gaussian
+            string: characteristics of the Binomial
 
         """
 

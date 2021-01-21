@@ -8,6 +8,7 @@ import unittest
 
 from distributions import Gaussian
 from distributions import Binomial
+from distributions import Bernoulli
 
 class TestGaussianClass(unittest.TestCase):
     def setUp(self):
@@ -87,6 +88,45 @@ class TestBinomialClass(unittest.TestCase):
 
         self.assertEqual(binomial_sum.p, .4)
         self.assertEqual(binomial_sum.n, 80)
+
+class TestBernoulliClass(unittest.TestCase):
+    def setUp(self):
+        self.bernoulli = Bernoulli(0.4)
+        self.bernoulli.read_data_file('numbers_binomial.txt')
+
+    def test_initialization(self):
+        self.assertEqual(self.bernoulli.p, 0.4, 'p value incorrect')
+
+    def test_readdata(self):
+        self.assertEqual(self.bernoulli.data,\
+         [0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0], 'data not read in correctly')
+
+    def test_calculatemean(self):
+        mean = self.bernoulli.calculate_mean()
+        self.assertEqual(mean, 0.4)
+
+    def test_calculatestdev(self):
+        stdev = self.bernoulli.calculate_stdev()
+        self.assertEqual(round(stdev,2), 0.49)
+
+    def test_replace_stats_with_data(self):
+        p = self.bernoulli.replace_stats_with_data()
+        self.assertEqual(round(p,3), .615)
+
+    def test_pmf(self):
+        self.assertEqual(round(self.bernoulli.pmf(1), 1), 0.4)
+        self.assertEqual(round(self.bernoulli.pmf(0), 1), 0.6)
+
+        self.bernoulli.replace_stats_with_data()
+        self.assertEqual(round(self.bernoulli.pmf(1), 3), 0.615)
+        self.assertEqual(round(self.bernoulli.pmf(0), 3), 0.385)
+
+    def test_add(self):
+        bernoulli_one = Bernoulli(.4)
+        bernoulli_two = Bernoulli(.4)
+        bernoulli_sum = bernoulli_one + bernoulli_two
+
+        self.assertEqual(bernoulli_sum.p, .4)
 
 
 if __name__ == '__main__':

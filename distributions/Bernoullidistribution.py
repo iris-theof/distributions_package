@@ -1,6 +1,7 @@
 import math
 import matplotlib.pyplot as plt
 from .Generaldistribution import Distribution
+from .Binomialdistribution import Binomial
 
 class Bernoulli(Distribution):
      """ Bernoulli distribution class for calculating and visualizing a Bernoulli distribution.
@@ -32,7 +33,7 @@ class Bernoulli(Distribution):
 
             """
 
-	        self.mean = p
+	        self.mean = self.p
 
 	        return self.mean
 
@@ -75,16 +76,16 @@ class Bernoulli(Distribution):
        	"""Probability mass function calculator for the Bernoulli distribution.
 
            Args:
-               x (float): point for calculating the probability mass function
+               k (0 or 1): number of successes
 
 
            Returns:
                float: probability mass function output
         """
 
-        q = 1 - p
+        q = 1 - self.p
 
-        return p**k*(q)**(1-k)
+        return self.p**k*(q)**(1-k)
 
      def plot_bar(self):
 
@@ -103,32 +104,43 @@ class Bernoulli(Distribution):
         plt.xlabel('outcome')
         plt.ylabel('count')
 
-     def plot_bar_pdf(self):
-        """Function to plot the pdf of the binomial distribution
+     def __add__(self, other):
 
-           Args:
-               None
+        """Function to add together two Bernoulli distributions with equal p
 
-           Returns:
-               list: x values for the pmf plot
-               list: y values for the pmf plot
+        Args:
+            other (Bernoulli): Bernoulli instance
+
+        Returns:
+            Binomial: Binomial distribution
 
         """
 
-        x = []
-        y = []
+        try:
+            assert self.p == other.p, 'p values are not equal'
+        except AssertionError as error:
+            raise
 
-        # calculate the x values to visualize
-        for i in range(self.n + 1):
-            x.append(i)
-            y.append(self.pdf(i))
+        result = Binomial()
+        result.n = 2
+        result.p = self.p
+        result.calculate_mean()
+        result.calculate_stdev()
 
-        # make the plots
-        plt.bar(x, y)
-        plt.title('Distribution of Outcomes')
-        plt.ylabel('Probability')
-        plt.xlabel('Outcome')
+        return result
 
-        plt.show()
 
-        return x, y
+     def __repr__(self):
+
+        """Function to output the characteristics of the Bernoulli instance
+
+        Args:
+            None
+
+        Returns:
+            string: characteristics of the Bernoulli
+
+        """
+
+        return "mean {}, standard deviation {}, p {}".\
+        format(self.mean, self.stdev, self.p)
