@@ -65,7 +65,24 @@ The format of the file should be a single column of numbers (see e.g. `"numbers_
    `binomial_1` (it will display the numbers of trials n, and the success propability of each trial p)
   * To calculate the PMF at k which is the number of successes (e.g. for k=2)
   `binomial_1.pmf(2)`. One needs to be careful as k needs to be a positive integer.
-   
+ 
+ ### For Bernoulli distributions
+ 1. From a python shell first import the necessary module for Binomial distributions
+   `from distributions import Bernoulli`
+ 2. To load the data file from which we will calculate different properties of a specific distribution use e.g. `bernoulli_1=Bernoulli("file_path")`. The format of the file should be a single column of numbers that are either 0 or 1 (see e.g. `"numbers_binomial.txt"`). Note that we use for our example and unit tests the same file as the one for the Binomial distribution, since it serves our purpose. 
+ 3.  
+ * To plot the propability of success (1) and failure (0) in a bar chart:
+ `bernoulli_1.plot_bar()` 
+ * To calculate the success propability of the distribution p:
+  `bernoulli_1.p`
+  * To calculate the mean:
+  `bernoulli_1.calculate_mean()`
+  * To calculate the standard deviation:
+  `bernoulli_1.calculate_stdev()`
+  * To calculate the parameters of the distribution:
+   `bernoulli_1` (it will display the success propability p and the failure propability q)
+  * To calculate the PMF for k=1 (success) or k=0 (failure)
+  `bernoulli_1.pmf(0)`. 
 
 ## Licensing, Authors, Acknowledgements<a name="licensing"></a>
 
