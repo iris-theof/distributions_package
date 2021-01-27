@@ -7,6 +7,7 @@
 import unittest
 
 from distributions import Gaussian
+from distributions import Binomial
 
 
 class TestGaussianClass(unittest.TestCase):
@@ -34,8 +35,34 @@ class TestGaussianClass(unittest.TestCase):
          'pdf function does not give expected result')
 
     def test_def(self):
-        self.assertEqual(str(self.gaussian), "mean {}, standard deviation {}".
-                         format(45.5,3.92))
+        self.assertEqual(str(self.gaussian), "mean {}, variance {}".
+                         format(45.5, 15.36))
+
+class TestBinomialClass(unittest.TestCase):
+    def setUp(self):
+        self.binomial = Binomial('numbers_binomial.txt')
+
+    def test_readdata(self):
+        self.assertEqual(self.binomial.data,\
+         [0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0], 'data not read in correctly')
+
+    def test_meancalculation(self):
+        mean = self.binomial.calculate_mean()
+        self.assertEqual(mean, 8)
+
+    def test_stdevcalculation(self):
+        stdev = self.binomial.calculate_stdev()
+        self.assertEqual(round(stdev, 2), 1.75)
+
+    def test_pmf(self):
+        self.assertEqual(round(self.binomial.pmf(5), 5), 0.05439)
+        self.assertEqual(round(self.binomial.pmf(3), 5), 0.00472)
+
+    def test_def(self):
+        self.assertEqual(str(self.binomial),
+        """Number of trials {}, success propability for each trial {} """ .\
+        format(13, 0.62))
+
 
 if __name__ == '__main__':
     unittest.main()

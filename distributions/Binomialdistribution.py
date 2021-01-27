@@ -14,15 +14,12 @@ class Binomial(Distribution):
         n (int) number of trials
     """
 
+    def __init__(self, file_name='name'):
 
-    def __init__(self, prob=.5, size=20):
+        Distribution.__init__(self, file_name)
 
-        self.n = size
-        self.p = prob
-
-        Distribution.__init__(self, self.calculate_mean(), self.calculate_stdev())
-
-
+        self.n = len(self.data)
+        self.p = 1.0 * sum(self.data) / len(self.data)
 
     def calculate_mean(self):
 
@@ -59,17 +56,16 @@ class Binomial(Distribution):
         return self.stdev
 
 
-    def replace_stats_with_data(self):
+    def extract_stats_from_data(self):
 
-        """Function to calculate p and n from the data set
+        """Function to calculate p, n, mean and standard deviation from the data
+         set
 
         Args:
             None
 
         Returns:
-            float: the p value
-            float: the n value
-
+            None
         """
 
         self.n = len(self.data)
@@ -77,12 +73,8 @@ class Binomial(Distribution):
         self.mean = self.calculate_mean()
         self.stdev = self.calculate_stdev()
 
-        return self.p, self.n
-
-
-
     def plot_bar(self):
-        """Function to output a histogram of the instance variable data using
+        """Function to output a bar chart of the instance variable data using
         matplotlib pyplot library.
 
         Args:
@@ -92,6 +84,8 @@ class Binomial(Distribution):
             None
         """
 
+        self.extract_stats_from_data()
+
         plt.bar(x = ['0', '1'], height = [(1 - self.p) * self.n, self.p * self.n])
         plt.title('Bar Chart of Data')
         plt.xlabel('outcome')
@@ -100,7 +94,7 @@ class Binomial(Distribution):
         plt.show()
 
     def pmf(self, k):
-        """Probability density function calculator for the binomial distribution.
+        """Probability mass function calculator for the binomial distribution.
 
         Args:
           k (natural number): number of successes
@@ -110,15 +104,17 @@ class Binomial(Distribution):
             float: probability mass function output
         """
 
+        self.extract_stats_from_data()
+
         a = math.factorial(self.n) / (math.factorial(k) * (math.factorial(self.n - k)))
         b = (self.p ** k) * (1 - self.p) ** (self.n - k)
 
         return a * b
 
 
-    def plot_bar_pdf(self):
+    def plot_bar_pmf(self):
 
-        """Function to plot the pdf of the binomial distribution
+        """Function to plot the pmf of the binomial distribution
 
         Args:
             None
@@ -132,46 +128,21 @@ class Binomial(Distribution):
         x = []
         y = []
 
+        self.extract_stats_from_data()
+
         # calculate the x values to visualize
         for i in range(self.n + 1):
             x.append(i)
-            y.append(self.pdf(i))
+            y.append(self.pmf(i))
 
         # make the plots
         plt.bar(x, y)
         plt.title('Distribution of Outcomes')
-        plt.ylabel('Probability')
+        plt.ylabel('Probability Mass Function')
         plt.xlabel('Outcome')
-
         plt.show()
 
         return x, y
-
-    def __add__(self, other):
-
-        """Function to add together two Binomial distributions with equal p
-
-        Args:
-            other (Binomial): Binomial instance
-
-        Returns:
-            Binomial: Binomial distribution
-
-        """
-
-        try:
-            assert self.p == other.p, 'p values are not equal'
-        except AssertionError as error:
-            raise
-
-        result = Binomial()
-        result.n = self.n + other.n
-        result.p = self.p
-        result.calculate_mean()
-        result.calculate_stdev()
-
-        return result
-
 
     def __repr__(self):
 
@@ -185,5 +156,7 @@ class Binomial(Distribution):
 
         """
 
-        return "mean {}, standard deviation {}, p {}, n {}".\
-        format(self.mean, self.stdev, self.p, self.n)
+        self.extract_stats_from_data()
+
+        return "Number of trials {}, success propability for each trial {} ".\
+                format(self.n, round(self.p, 2))

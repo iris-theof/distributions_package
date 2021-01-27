@@ -12,10 +12,8 @@ class Gaussian(Distribution):
 
     """
 
-#    def __init__(self, mu=0, sigma=1):
     def __init__(self, file_name='name'):
 
-        #Distribution.__init__(self, mu, sigma)
         Distribution.__init__(self, file_name)
 
     def calculate_mean(self):
@@ -70,14 +68,13 @@ class Gaussian(Distribution):
 
     def extract_stats_from_data(self):
 
-#        """Function to calculate p and n from the data set
-#        Args:
-#            None
+        """Function to calculate mean and standard deviation from the data set
+         Args:
+            None
 
-#        Returns:
-#            float: the mean value from the data
-#            float: the stdev value from the data
-#        """
+         Returns:
+            None
+        """
 
         self.mean = self.calculate_mean()
         self.stdev = self.calculate_stdev()
@@ -174,8 +171,8 @@ class Gaussian(Distribution):
             string: characteristics of the Gaussian
 
         """
-        self.mean = self.calculate_mean()
-        self.stdev = self.calculate_stdev()
 
-        return "mean {}, standard deviation {}".format(round(self.mean,2),
-                                                       round(self.stdev,2))
+        self.extract_stats_from_data()
+
+        return "mean {}, variance {}".format(round(self.mean,2),
+                                                       round(self.stdev**2,2))
