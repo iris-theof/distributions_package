@@ -27,10 +27,10 @@ Inside the distributions folder there are 3 '.py' files that correspond to each 
    "gaussian_1=Gaussian("file_path")"
 4. * To plot the propability density function and the normed histogram of data:
    "gaussian_1.histogram_pdf()"
-   ![PDF Gaussian](https://github.com/iris-theof/distributions_package/PDF_Gaussian.png)
+   ![PDF Gaussian](https://github.com/iris-theof/distributions_package/blob/master/PDF_Gaussian.png)
    * To plot a histogram of the data:
    "gaussian_1.plot_histogram()"
-    ![Histogram Gaussian](https://github.com/iris-theof/distributions_package/Histogram_Gaussian.png)
+    ![Histogram Gaussian](https://github.com/iris-theof/distributions_package/blob/master/Histogram_Gaussian..png)
    * To calculate the parameters of the distribution:
    "gaussian_1" (in case of a gaussian it will show the mean and the standard deviation)
    * To calculate the mean
