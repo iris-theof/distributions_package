@@ -73,6 +73,7 @@ The format of the file should be a single column of numbers (see e.g. `"numbers_
  3.  
  * To plot the propability of success (1) and failure (0) in a bar chart:
  `bernoulli_1.plot_bar()` 
+ ![Bar Plot Bernoulli](https://github.com/iris-theof/distributions_package/blob/master/Bar_plot_Bernoulli.png)
  * To calculate the success propability of the distribution p:
   `bernoulli_1.p`
   * To calculate the mean:
