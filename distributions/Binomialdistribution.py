@@ -97,7 +97,7 @@ class Binomial(Distribution):
         plt.xlabel('outcome')
         plt.ylabel('count')
 
-
+        plt.show()
 
     def pmf(self, k):
         """Probability density function calculator for the binomial distribution.

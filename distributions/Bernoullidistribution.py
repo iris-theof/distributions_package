@@ -100,6 +100,8 @@ class Bernoulli(Distribution):
         plt.xlabel('outcome')
         plt.ylabel('count')
 
+        plt.show()
+
     def __add__(self, other):
 
         """Function to add together two Bernoulli distributions with equal p
