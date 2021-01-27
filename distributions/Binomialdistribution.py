@@ -58,7 +58,7 @@ class Binomial(Distribution):
 
     def extract_stats_from_data(self):
 
-        """Function to calculate p, n, mean and standard deviation from the data
+        """Function to calculate p, n from the data
          set
 
         Args:
@@ -72,8 +72,8 @@ class Binomial(Distribution):
         self.p = 1.0 * sum(self.data) / len(self.data)
 
     def plot_bar(self):
-        """Function to output a bar chart of the instance variable data using
-        matplotlib pyplot library.
+        """Function to output a bar chart of the number of successes and
+        failures using matplotlib pyplot library.
 
         Args:
             None
@@ -145,11 +145,11 @@ class Binomial(Distribution):
         plt.xlabel('Number of successes (k)')
         plt.show()
 
-        return 
+        return
 
     def __repr__(self):
 
-        """Function to output the characteristics of the Binomial instance
+        """Function to output the parameters of the Binomial instance
 
         Args:
             None

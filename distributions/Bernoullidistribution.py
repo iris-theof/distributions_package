@@ -1,7 +1,6 @@
 import math
 import matplotlib.pyplot as plt
 from .Generaldistribution import Distribution
-from .Binomialdistribution import Binomial
 
 class Bernoulli(Distribution):
     """ Bernoulli distribution class for calculating and visualizing a Bernoulli distribution.
@@ -14,10 +13,11 @@ class Bernoulli(Distribution):
 
      """
 
-    def __init__(self, prob=.5):
+    def __init__(self, file_name='name'):
 
-        self.p = prob
-        Distribution.__init__(self, self.calculate_mean(), self.calculate_stdev())
+        Distribution.__init__(self, file_name)
+
+        self.p = 1.0 * sum(self.data) / len(self.data)
 
     def calculate_mean(self):
         """Function to calculate the mean
@@ -35,7 +35,7 @@ class Bernoulli(Distribution):
 
     def calculate_stdev(self):
 
-        """Function to calculate the standard deviation from p.
+        """Function to calculate the standard deviation from p
 
           Args:
             None
@@ -49,7 +49,7 @@ class Bernoulli(Distribution):
 
         return self.stdev
 
-    def replace_stats_with_data(self):
+    def extract_stats_from_data(self):
 
         """Function to calculate p from the data set
 
@@ -62,8 +62,6 @@ class Bernoulli(Distribution):
         """
 
         self.p = 1.0 * sum(self.data) / len(self.data)
-        self.mean = self.calculate_mean()
-        self.stdev = self.calculate_stdev()
 
         return self.p
 
@@ -79,14 +77,19 @@ class Bernoulli(Distribution):
                float: probability mass function output
         """
 
+        if ((k == 1) or (k == 0)) == False:
+            print(k)
+            print ("k (the argumnet of pmf) needs to be either zero or one")
+            exit()
+
         q = 1 - self.p
 
         return self.p**k*(q)**(1-k)
 
     def plot_bar(self):
 
-        """Function to output a histogram of the instance variable data using
-        matplotlib pyplot library.
+        """Function to output a bar plot of the propability of success
+           and failure
 
           Args:
               None
@@ -96,41 +99,15 @@ class Bernoulli(Distribution):
         """
 
         plt.bar(x=['0', '1'], height=[(1 - self.p), self.p])
-        plt.title('Bar Chart of Data')
-        plt.xlabel('outcome')
-        plt.ylabel('count')
+        plt.title('Propability of failure (0) and success (1)')
+        plt.xlabel('Outcome')
+        plt.ylabel('Propability')
 
         plt.show()
 
-    def __add__(self, other):
-
-        """Function to add together two Bernoulli distributions with equal p
-
-        Args:
-            other (Bernoulli): Bernoulli instance
-
-        Returns:
-            Binomial: Binomial distribution
-
-        """
-
-        try:
-            assert self.p == other.p, 'p values are not equal'
-        except AssertionError as error:
-            raise
-
-        result = Binomial()
-        result.n = 2
-        result.p = self.p
-        result.calculate_mean()
-        result.calculate_stdev()
-
-        return result
-
-
     def __repr__(self):
 
-        """Function to output the characteristics of the Bernoulli instance
+        """Function to output the parameters of the Bernoulli instance
 
         Args:
             None
@@ -140,5 +117,5 @@ class Bernoulli(Distribution):
 
         """
 
-        return "mean {}, standard deviation {}, p {}".\
-        format(self.mean, self.stdev, self.p)
+        return "Propability of success p {}, propability of failure q {}".\
+        format(round(self.p,2), round((1-self.p),2))
