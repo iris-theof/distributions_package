@@ -70,8 +70,6 @@ class Binomial(Distribution):
 
         self.n = len(self.data)
         self.p = 1.0 * sum(self.data) / len(self.data)
-        self.mean = self.calculate_mean()
-        self.stdev = self.calculate_stdev()
 
     def plot_bar(self):
         """Function to output a bar chart of the instance variable data using
@@ -87,7 +85,7 @@ class Binomial(Distribution):
         self.extract_stats_from_data()
 
         plt.bar(x = ['0', '1'], height = [(1 - self.p) * self.n, self.p * self.n])
-        plt.title('Bar Chart of Data')
+        plt.title('Number of successes (1) and failures (0) ')
         plt.xlabel('outcome')
         plt.ylabel('count')
 
@@ -103,6 +101,11 @@ class Binomial(Distribution):
         Returns:
             float: probability mass function output
         """
+
+        if ((isinstance(k,int) == False) or (k < 0)):
+            print ("k (the argumnet of pmf) needs to be a non-negative integer")
+            exit()
+
 
         self.extract_stats_from_data()
 
@@ -139,10 +142,10 @@ class Binomial(Distribution):
         plt.bar(x, y)
         plt.title('Distribution of Outcomes')
         plt.ylabel('Probability Mass Function')
-        plt.xlabel('Outcome')
+        plt.xlabel('Number of successes (k)')
         plt.show()
 
-        return x, y
+        return 
 
     def __repr__(self):
 
