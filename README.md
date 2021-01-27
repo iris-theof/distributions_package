@@ -27,12 +27,12 @@ Inside the distributions folder there are 3 '.py' files that correspond to each 
 2. To load the data file from which we will calculate different properties of a specific  distribution use e.g. `gaussian_1=Gaussian("file_path")`.
 The format of the file should be a single column of numbers (see e.g. `"numbers_gaussian.txt"`). 
  3. 
-  * To plot the Propability Density Function (PDF) and the normed histogram of data:
-   `gaussian_1.histogram_pdf()`
-   ![PDF Gaussian](https://github.com/iris-theof/distributions_package/blob/master/PDF_Gaussian.png)
    * To plot a histogram of the data:
    `gaussian_1.plot_histogram()`
     ![Histogram Gaussian](https://github.com/iris-theof/distributions_package/blob/master/Histogram_Gaussian..png)
+  * To plot the Propability Density Function (PDF) and the normed histogram of data:
+   `gaussian_1.histogram_pdf()`
+   ![PDF Gaussian](https://github.com/iris-theof/distributions_package/blob/master/PDF_Gaussian.png)
    * To calculate the parameters of the distribution:
    `gaussian_1` (it will display the mean and the variance of the gaussian)
    * To calculate the mean:
@@ -49,8 +49,10 @@ The format of the file should be a single column of numbers (see e.g. `"numbers_
 3. 
  * To plot the total number of successes (1) and failures (0) in a bar chart:
     `binomial_1.plot_bar()`
+    ![Bar Plot Binomial](https://github.com/iris-theof/distributions_package/blob/master/Bar_plot_Binomial.png)
   * To plot the Propability Mass Function (PMF) for number of successes k:
-  `binomial_1.plot_bar_pmf()`  
+  `binomial_1.plot_bar_pmf()` 
+  ![PMF Binomial]( https://github.com/iris-theof/distributions_package/blob/master/PMF_Binomial.png)
   * To calculate the success propability of the distribution p:
   `binomial_1.p`
   * To calculate the number of trials n:
